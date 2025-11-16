@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: compile main
+        run: gcc main.c sudoku.c -o cdoku
+
+      - name: compile tests
+        run: gcc test.c sudoku.c -o test
+
+      - name: run tests
+        run: ./test
