@@ -4,9 +4,9 @@ Sudoku implementation in C.
 
 # Usage
 
-Compile using `gcc`:
+Compile and run with:
 ```
-gcc main.c -o cdoku
+gcc main.c -o cdoku && ./cdoku
 ```
 
 Run it with:
