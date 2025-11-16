@@ -1,6 +1,10 @@
+#include "sudoku.h"
 #include <stdio.h>
 
 int main(void) {
-    printf("Hello, Sudoku!\n");
+    int board[SIZE][SIZE] = {0};
+
+    printBoard(board);
+
     return 0;
 }
