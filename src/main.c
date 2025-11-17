@@ -1,8 +1,6 @@
 #include "sudoku.h"
 #include <stdio.h>
 
-#define SIZE 9
-
 int main(void) {
     int board[SIZE][SIZE] = {
         {5, 3, 0, 0, 7, 0, 0, 0, 0},
@@ -21,12 +19,12 @@ int main(void) {
     printf("Initial puzzle:\n");
     printBoard(board);
 
-    if (solve(board)) {
+    if (solve(board) == SUCCESS) {
         printf("\nSolved puzzle:\n");
         printBoard(board);
     } else {
         printf("No solution exists.\n");
     }
 
-    return 0;
+    return SUCCESS;
 }
