@@ -5,5 +5,6 @@
 
 int isValid(int board[SIZE][SIZE], int row, int col, int num);
 void printBoard(int board[SIZE][SIZE]);
+int solve(int board[SIZE][SIZE]);
 
 #endif

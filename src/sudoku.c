@@ -19,6 +19,39 @@ int isValid(int board[SIZE][SIZE], int row, int col, int num) {
     return 1;
 }
 
+int solve(int board[SIZE][SIZE]) {
+    int row = -1, col = -1;
+    int foundEmpty = 0;
+
+    for (int r = 0; r < SIZE; r++) {
+        for (int c = 0; c < SIZE; c++) {
+            if (board[r][c] == 0) {
+                row = r;
+                col = c;
+                foundEmpty = 1;
+                break;
+            }
+        }
+        if (foundEmpty) break;
+    }
+
+    if (!foundEmpty) return 1;
+
+    for (int num = 1; num <= SIZE; num++) {
+        if (isValid(board, row, col, num)) {
+            board[row][col] = num;
+
+            if (solve(board)) {
+                return 1;
+            }
+
+            board[row][col] = 0;
+        }
+    }
+
+    return 0;
+}
+
 void printBoard(int board[SIZE][SIZE]) {
     for (int row = 0; row < SIZE; row++) {
         if (row % 3 == 0 && row != 0) printf("---------------------\n");
