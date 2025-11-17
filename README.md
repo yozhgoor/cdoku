@@ -6,10 +6,10 @@ Sudoku implementation in C.
 
 Compile and run with:
 ```
-gcc src/main.c src/sudoku.c -o cdoku && ./cdoku
+gcc src/main.c src/sudoku.c -o cdoku_bin && ./cdoku_bin
 ```
 
 Compile and run tests with:
 ```
-gcc src/test.c src/sudoku.c -o test && ./test
+gcc src/test.c src/sudoku.c -o test_bin && ./test_bin
 ```
