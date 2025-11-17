@@ -13,6 +13,8 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - run: mkdir target
+
       - name: compile main
         run: gcc -Wall -Wextra src/main.c src/sudoku.c -o target/cdoku
 
