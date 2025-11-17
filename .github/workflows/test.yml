@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: compile main
-        run: gcc -Wall -Wextra src/main.c src/sudoku.c -o cdoku
+        run: gcc -Wall -Wextra src/main.c src/sudoku.c -o target/cdoku
 
       - name: compile tests
-        run: gcc -Wall -Wextra src/test.c src/sudoku.c -o test
+        run: gcc -Wall -Wextra src/tests.c src/sudoku.c -o target/tests
 
       - name: run tests
-        run: ./test
+        run: target/tests
