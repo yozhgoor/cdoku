@@ -2,28 +2,19 @@
 #include <stdio.h>
 
 int main(void) {
-    int board[SIZE][SIZE] = {
-        {5, 3, 0, 0, 7, 0, 0, 0, 0},
-        {0, 0, 0, 1, 9, 5, 0, 0, 0},
-        {0, 9, 8, 0, 0, 0, 0, 0, 0},
+    int board[SIZE][SIZE];
+    int emptyCells = 40;
 
-        {8, 0, 0, 0, 0, 0, 0, 0, 3},
-        {4, 0, 0, 8, 0, 3, 0, 0, 1},
-        {7, 0, 0, 0, 2, 0, 0, 0, 6},
+    generatePuzzle(board, emptyCells);
 
-        {0, 6, 0, 0, 0, 0, 2, 8, 0},
-        {0, 0, 0, 4, 1, 9, 0, 0, 5},
-        {0, 0, 0, 0, 8, 0, 0, 7, 9},
-    };
-
-    printf("Initial puzzle:\n");
+    printf("Generated puzzle:\n");
     printBoard(board);
 
     if (solve(board) == SUCCESS) {
         printf("\nSolved puzzle:\n");
         printBoard(board);
     } else {
-        printf("No solution exists.\n");
+        printf("No solution found.\n");
     }
 
     return SUCCESS;
