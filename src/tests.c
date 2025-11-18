@@ -117,6 +117,40 @@ int testAlreadySolved() {
     return failures;
 }
 
+int countEmptyCells(int board[SIZE][SIZE]) {
+    int count = 0;
+    for (int row = 0; row < SIZE; row++) {
+        for (int col = 0; col < SIZE; col++) {
+            if (board[row][col] == 0) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+int testGeneratePuzzle() {
+    int board[SIZE][SIZE];
+    int failures = 0;
+    int targetEmpty = 30;
+
+    generatePuzzle(board, targetEmpty);
+
+    failures += assertTest(isBoardValid(board) == SUCCESS, "Generated board is valid");
+    failures += assertTest(
+        countEmptyCells(board) == targetEmpty,
+        "Puzzle has correct number of empty cells"
+    );
+
+    int solved[SIZE][SIZE];
+    memcpy(solved, board, sizeof(board));
+
+    failures += assertTest(solve(solved) == SUCCESS, "Generated puzzle is solvable");
+    failures += assertTest(countEmptyCells(solved) == 0, "Solved puzzle has not empty cells");
+
+    return failures;
+}
+
 int main(void) {
     int failures = 0;
 
@@ -125,6 +159,7 @@ int main(void) {
     failures += testSolveSuccess();
     failures += testSolveFailure();
     failures += testAlreadySolved();
+    failures += testGeneratePuzzle();
 
     if (failures > 0) {
         printf("Tests failed! (%d failure(s))\n", failures);

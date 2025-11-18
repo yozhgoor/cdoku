@@ -1,5 +1,7 @@
 #include "sudoku.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int isValid(int board[SIZE][SIZE], int row, int col, int num) {
     for (int x = 0; x < SIZE; x++) {
@@ -58,6 +60,18 @@ int findEmptyCell(int board[SIZE][SIZE], int *row, int *col) {
     return FAILURE;
 }
 
+void removeCells(int board[SIZE][SIZE], int emptyCells) {
+    while (emptyCells > 0) {
+        int row = rand() % SIZE;
+        int col = rand() % SIZE;
+
+        if (board[row][col] != 0) {
+            board[row][col] = 0;
+            emptyCells--;
+        }
+    }
+}
+
 int solve(int board[SIZE][SIZE]) {
     int row, col;
 
@@ -82,6 +96,38 @@ int solve(int board[SIZE][SIZE]) {
     }
 
     return FAILURE;
+}
+
+int generateFullSolution(int board[SIZE][SIZE]) {
+    for (int row = 0; row < SIZE; row++) {
+        for (int col = 0; col < SIZE; col++) {
+            board[row][col] = 0;
+        }
+    }
+
+    int nums[SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (int i = SIZE - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    for (int col = 0; col < SIZE; col++) {
+        board[0][col] = nums[col];
+    }
+
+    return solve(board);
+}
+
+void generatePuzzle(int board[SIZE][SIZE], int emptyCells) {
+    srand(time(NULL));
+
+    if (generateFullSolution(board) == FAILURE) {
+        printf("failed to generate full solution.\n");
+        return;
+    }
+
+    removeCells(board, emptyCells);
 }
 
 void printBoard(int board[SIZE][SIZE]) {
